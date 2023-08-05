@@ -11,13 +11,23 @@
 int [,,] Create3dArray (int rows, int collumns, int layers)
 {
     int [,,] Create3dArray = new int[rows, collumns, layers];
+    int tempSize = rows*collumns*layers; 
+    if (tempSize <=90)
+    {
+    int [] tempAr = UnVal(tempSize);
+    int iTemp = 0;
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < collumns; j++)
             for (int z = 0; z < layers; z++)
-        Create3dArray[i,j,z] = new Random().Next(10,100);
-return Create3dArray;
+            {
+                if (iTemp >=0 && iTemp < tempSize)
+                {
+                    Create3dArray[i,j,z] = tempAr[iTemp];}
+                    iTemp++;
+                }
+            }
+       return Create3dArray;
 }
-
 
 void ShowArray (int [,,] showedArray)
 {
@@ -33,6 +43,27 @@ void ShowArray (int [,,] showedArray)
     Console.WriteLine();
     }
 Console.WriteLine();
+}
+
+int [] UnVal (int size)
+{
+    int [] unAr = new int [size];
+    for (int i = 0; i < size; i++)
+        {
+            unAr[i] = new Random().Next(10,100);
+            if (i != 0)
+            {
+                for (int r = 0; r < i; r++)
+                {
+                    while (unAr [r] == unAr[i])
+                    {
+                        unAr [r] = new Random().Next(10,100);
+                    }
+                }
+            
+            }   
+        } 
+    return unAr;
 }
 
 Console.Clear();
